@@ -29,9 +29,9 @@ public class EventCompositeController {
 
     @GetMapping(path = "/", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE, APPLICATION_JSON_UTF8_VALUE})
     public HttpEntity<ResourceSupport> root() {
-        ResourceSupport resourceSupport = new ResourceSupport();
-        resourceSupport.add(new Link(new UriTemplate(linkTo(EventCompositeController.class, "").toString() + "/{eventId}"), "event"));
-        return new ResponseEntity<>(resourceSupport, HttpStatus.OK);
+        ResourceSupport resourceRoot = new ResourceSupport();
+        resourceRoot.add(new Link(new UriTemplate(linkTo(EventCompositeController.class, "").toString() + "/{eventId}"), "event"));
+        return new ResponseEntity<>(resourceRoot, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{eventId}", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE, APPLICATION_JSON_UTF8_VALUE})

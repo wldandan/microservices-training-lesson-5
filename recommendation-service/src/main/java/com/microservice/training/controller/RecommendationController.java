@@ -22,17 +22,17 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class RecommendationController {
 
-    @GetMapping(path = "/", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE, APPLICATION_JSON_UTF8_VALUE})
+    @GetMapping(path = "/", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE})
     public HttpEntity<ResourceSupport> root() {
 
-        ResourceSupport halResponse = new ResourceSupport();
-        halResponse.add(
+        ResourceSupport resourceRoot = new ResourceSupport();
+        resourceRoot.add(
                 new Link(new UriTemplate(linkTo(RecommendationController.class, "").slash("/recommendations").toString() + "{?eventId}"), "recommendations"));
-        halResponse.add(
+        resourceRoot.add(
                 new Link(
                         new UriTemplate(linkTo(RecommendationController.class, "").slash("recommendations").toString() + "/{recommendationId}"), "recommendation"));
 
-        return new ResponseEntity<>(halResponse, HttpStatus.OK);
+        return new ResponseEntity<>(resourceRoot, HttpStatus.OK);
     }
 
     @RequestMapping("/recommendations/{id}")

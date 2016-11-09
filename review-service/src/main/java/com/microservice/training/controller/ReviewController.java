@@ -27,17 +27,17 @@ import org.slf4j.LoggerFactory;
 public class ReviewController {
     private static final Logger LOG = LoggerFactory.getLogger(ReviewController.class);
 
-    @GetMapping(path = "/", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE, APPLICATION_JSON_UTF8_VALUE})
+    @GetMapping(path = "/", produces = {HAL_JSON_VALUE, APPLICATION_JSON_VALUE})
     public HttpEntity<ResourceSupport> root() {
-        ResourceSupport halResponse = new ResourceSupport();
-        halResponse.add(
+        ResourceSupport resourceRoot = new ResourceSupport();
+        resourceRoot.add(
                 new Link(
                         new UriTemplate(linkTo(ReviewController.class, "").slash("/reviews").toString() + "{?eventId}"), "reviews"));
-        halResponse.add(
+        resourceRoot.add(
                 new Link(
                         new UriTemplate(linkTo(ReviewController.class, "").slash("reviews").toString() + "/{reviewId}"), "review"));
 
-        return new ResponseEntity<>(halResponse, HttpStatus.OK);
+        return new ResponseEntity<>(resourceRoot, HttpStatus.OK);
     }
 
     @RequestMapping("/reviews/{id}")
