@@ -48,7 +48,6 @@ seed.sh
 ##### a). 安装并启动依赖
 
 * MongoDB
-* RabbitMQ
 
 ##### b). 启动应用
 
